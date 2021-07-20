@@ -1,8 +1,8 @@
 #GIT Essential Commands
-1. git init - 
+1. **git init** - 
       This will initiate the git repository. 
       
-2. git clone - 
+2. **git clone** - 
      This will clone the remote repository to the local machine.
      
 3. git config --global uer.name 'username' - 
