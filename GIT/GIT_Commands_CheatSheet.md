@@ -45,3 +45,19 @@
 20. **git stash apply** - This is same as **git stash pop** . When you have more than one stash, during reapply of the changes will come as **last in first out(LIFO)**
 
 21. **git stash list** - This will list the current stash. 
+
+22. **git branch** - This will show the branch details
+
+23. **git branch mybranch** - This will create a new branch named mybranch
+
+24. **git checkout -b newbranch** - This will create a new branch and checkout th branch
+
+25. **git branch -d delbranch** - This will delete the branch
+
+26. **git merge mybranch** - This will merge the mybranch changes to the current checkedout branch
+
+27. **git merge --abort** - This will abort the merge which is happening 
+
+28. **git remote -v** - This will show the current configured remote branch
+
+29. **git remote set origin <giturl>** - This will set the remote repository
