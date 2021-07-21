@@ -4,10 +4,13 @@
   host: new_servers 
   become: yes
   become_user: root
+  vars:
+    - git_service: git
+    - httpd
   tasks:
     - name: This will install the git 
       yum:
-        name: git
+        name: "{{ git_service }}"
         state: present
 
     - name: Start the Git Service
