@@ -1,0 +1,13 @@
+---
+- name: This playbook will copy the file with when condition
+  hosts: all
+  become: true
+  become_user: root
+  vars:
+    - store_location: /home/ec2-user/
+  tasks:
+    - name: Copy the file with when condition
+      copy:
+        src: "{{ store_location }}/text.txt"
+        dest: "{{ store_location }}/ansible-files"
+      when: ansible_distribution == "CentOS"  
