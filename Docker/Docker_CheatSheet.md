@@ -27,3 +27,7 @@
 14. **docker images -q** - This will list the image id's of images.
 
 15. **docker container ls** - This will also list the current running docker containers.
+
+16. **docker logs cont_id** - This will list the logs of the current container
+
+17. **docker logs --tail 3 cont_id** - This will show the last 3 lines of the docker container logs 
