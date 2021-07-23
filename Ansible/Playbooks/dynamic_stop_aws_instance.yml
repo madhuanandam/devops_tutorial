@@ -4,7 +4,7 @@
   hosts: localhost
   become: false
   connection: local
-  gather_facts: false
+  gather_facts: true
   tasks:
           - pip:
                   name: boto
@@ -13,7 +13,9 @@
             ec2_instance_info:
                     region: us-east-2
                     filters:
-                            "tag:Env": anandam
+                            "tag:host": target
+        
+                            
                             
             register: ec2_info
 
@@ -24,7 +26,7 @@
                     state: stopped
                     wait: yes
             loop: "{{ ec2_info.instances }}"
-            failed_when: i-06f07800554f2a902 == "{{ item.instance_id }}"
+            
                     
             
             
