@@ -1,0 +1,32 @@
+---
+
+- name: Stop the instances which are running using when
+  hosts: localhost
+  become: false
+  connection: local
+  gather_facts: false
+  tasks:
+          - pip:
+                  name: boto
+
+          - name: Check the running instances
+            ec2_instance_info:
+                    region: us-east-2
+                    filters:
+                            "tag:Env": anandam
+                            
+            register: ec2_info
+
+          - name: Stop the instances
+            ec2:
+                    instance_ids: "{{ item.instance_id }}"
+                    region: us-east-2
+                    state: stopped
+                    wait: yes
+            loop: "{{ ec2_info.instances }}"
+            failed_when: i-06f07800554f2a902 == "{{ item.instance_id }}"
+                    
+            
+            
+            
+

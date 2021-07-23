@@ -1,0 +1,25 @@
+---
+
+- name: This will create an aws instance
+  hosts: localhost
+  become: false
+  connection: local
+  gather_facts: false
+  tasks:
+          - pip:
+                  name: boto
+          - name: create instance
+            ec2:
+                    instance_type: t2.micro
+                    image: ami-0233c2d874b811deb
+                    count: 1
+                    key_name: devops-madhu-sg
+                    group: madhu-devops-sg
+                    region: us-east-2
+                    wait: yes
+                    instance_tags:
+                            Name: madhu
+                            Env: anandam
+
+
+

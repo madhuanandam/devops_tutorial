@@ -1,0 +1,17 @@
+---
+
+- name: stop aws instance
+  hosts: localhost
+  become: false
+  connection: local
+  gather_facts: false
+
+  tasks:
+          - pip:
+                  name: boto
+          - name: stop aws instance
+            ec2:
+                    instance_ids: i-07be05e2bd090a822
+                    region: us-east-2
+                    state: stopped
+
