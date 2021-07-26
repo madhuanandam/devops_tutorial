@@ -1,0 +1,25 @@
+---
+
+- name: Stop ec2 Instances
+  hosts: localhost
+  become: false
+  connection: local
+  gather_facts: true
+
+  tasks:
+          - name: find the ansible instances
+            ec2_instance_info:
+                    region: us-east-2
+                    filters:
+                            "tag:Env": anandam
+            register: ec2_info
+
+          - name: Displaying output
+            debug:
+                    msg: "{{ item.state.name }}"
+            loop: "{{ ec2_info.instances }}"
+
+          - name: display
+            debug:
+                    msg: "{{ ansible_hostname }}"
+

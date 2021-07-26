@@ -1,0 +1,60 @@
+---
+
+- name: This playbook will create, start, stop and terminate instances using tags
+  hosts: localhost
+  become: false
+  connection: local
+  gather_facts: false
+  vars:
+          instance:
+                  - i-095b77cfd1fc86275
+                  - i-07be05e2bd090a822
+                  - i-0e569b879429b0d87  
+  tasks:
+          - name: Create ec2 instance
+            ec2:
+                    instance_type: t2.micro
+                    image: ami-0233c2d874b811deb
+                    count: 1
+                    key_name: devops-madhu-sg
+                    group: madhu-devops-sg
+                    wait: yes
+                    region: us-east-2
+                    instance_tags:
+                            Name: jenkins_2
+                            Env: delete
+
+            tags:
+                    - create
+
+          - name: Start the Instances
+            ec2:
+                    instance_id: i-07be05e2bd090a822,i-0e569b879429b0d87
+                    region: us-east-2
+                    state: running
+                    wait: yes
+
+            tags:
+                    - start
+
+          - name: Stop the Instances
+            ec2:
+                    instance_id: i-0e569b879429b0d87,i-07be05e2bd090a822
+                    region: us-east-2
+                    state: stopped
+                    wait: yes
+            
+            tags:
+                    - stop
+
+          - name: Terminate Instances
+            ec2:
+                    instance_ids: i-09072909eb8aff86c
+                    region: us-east-2
+                    state: absent
+                    wait: yes
+            tags:
+                    - terminate
+                   
+
+

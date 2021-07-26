@@ -1,0 +1,28 @@
+---
+
+- name: Start AWS ec2 instances
+  hosts: localhost
+  become: false
+  connection: local
+  gather_facts: false
+  tasks:
+          - pip:
+                  name: boto
+
+          - name: Find the ec2 instances
+            ec2_instance_info:
+                    region: us-east-2
+                    filters:
+                            "tag:Env": anandam
+            register: ec2_info
+            
+
+          - name: start ec2 instance
+            ec2:
+                    instance_ids: "{{ item.instance_id }}"
+                    state: running
+                    region: us-east-2
+                    wait: yes
+            loop: "{{ ec2_info.instances }}"
+                    
+
